@@ -29,52 +29,17 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Cache npm (index)
+      - name: Cache node_modules
         uses: actions/cache@v4
         with:
-          path: index/node_modules
-          key: npm-index-${{ hashFiles('index/package.json') }}
+          path: node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('package.json') }}
 
-      - name: Cache npm (v1)
-        uses: actions/cache@v4
-        with:
-          path: v1/node_modules
-          key: npm-v1-${{ hashFiles('v1/package.json') }}
+      - name: Install
+        run: npm install --no-audit --no-fund
 
-      - name: Cache npm (v2)
-        uses: actions/cache@v4
-        with:
-          path: v2/node_modules
-          key: npm-v2-${{ hashFiles('v2/package.json') }}
-
-      - name: Install (index)
-        run: cd index && npm install --no-audit --no-fund
-
-      - name: Install (v1)
-        run: cd v1 && npm install --no-audit --no-fund
-
-      - name: Install (v2)
-        run: cd v2 && npm install --no-audit --no-fund
-
-      - name: Build (index)
-        run: cd index && npm run build
-
-      - name: Build (v1)
-        run: cd v1 && npm run build
-
-      - name: Build (v2)
-        run: cd v2 && npm run build
-
-      - name: Assemble dist/
-        run: |
-          rm -rf dist
-          mkdir -p dist/v1 dist/v2
-          cp -r index/out/. dist/
-          cp -r v1/out/. dist/v1/
-          cp -r v2/out/. dist/v2/
-          ls -la dist
-          ls -la dist/v1
-          ls -la dist/v2
+      - name: Build
+        run: npm run build
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
@@ -82,11 +47,22 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Sync to S3
+      - name: Sync HTML and other (short cache, must-revalidate)
         run: |
-          aws s3 sync dist/ "s3://${{ vars.S3_BUCKET }}/" \
+          aws s3 sync out/ "s3://${{ vars.S3_BUCKET }}/" \
             --delete \
+            --exclude "_next/static/*" \
+            --exclude "images/*" \
             --cache-control "public, max-age=300, must-revalidate"
+
+      - name: Sync hashed static (long cache, immutable)
+        run: |
+          aws s3 sync out/_next/static/ "s3://${{ vars.S3_BUCKET }}/_next/static/" \
+            --cache-control "public, max-age=31536000, immutable"
+          if [ -d out/images ]; then
+            aws s3 sync out/images/ "s3://${{ vars.S3_BUCKET }}/images/" \
+              --cache-control "public, max-age=2592000"
+          fi
 
       - name: Invalidate CloudFront
         run: |

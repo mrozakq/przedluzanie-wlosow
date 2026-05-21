@@ -1,0 +1,12 @@
+{
+  "name": "Przedłużanie włosów Magda · Wejherowo",
+  "short_name": "Magda",
+  "description": "Przedłużanie i zagęszczanie włosów w Wejherowie. Magda — Złota Seria, BabyHair, 30-dniowa gwarancja.",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "theme_color": "#4a0f1e",
+  "background_color": "#fdf6ee",
+  "display": "standalone",
+  "lang": "pl"
+}

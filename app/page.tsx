@@ -1,8 +1,9 @@
 const PHONE = '+48 533 104 437'
 const PHONE_HREF = 'tel:+48533104437'
-const BOOKSY_HREF = '#'
+const BOOKSY_HREF = 'https://przedluzaniewlosowmagda.booksy.com/'
 const ADDRESS = 'ul. 10 Lutego 1/2u, 84-200 Wejherowo'
-const MAP_QUERY = encodeURIComponent('ul. 10 Lutego 1/2u, 84-200 Wejherowo')
+const MAP_EMBED_SRC =
+  'https://www.google.com/maps?q=Przed%C5%82u%C5%BCanie+w%C5%82os%C3%B3w+Magda+Wejherowo&output=embed'
 
 const services = [
   { num: '01', name: 'Przedłużanie', desc: 'Pełna metamorfoza długości. Pasma najwyższej jakości, dobór koloru pod światło Twojej skóry.' },
@@ -12,17 +13,24 @@ const services = [
 ]
 
 const usp = [
-  { title: '30 dni gwarancji', desc: 'Nie cienia kompromisu. Pierwszy miesiąc — pełna opieka.' },
-  { title: 'Od 2020 r.', desc: 'Lata pracy z włosami. Setki klientek, dziesiątki metod, jedna pasja.' },
+  { title: '30 dni gwarancji', desc: 'Bez kompromisu. Pierwszy miesiąc po zabiegu — pełna opieka, korekta w cenie jeśli coś nie tak.' },
+  { title: 'Od 2020 r.', desc: 'Lata pracy z włosami w Wejherowie. Setki klientek z Trójmiasta i okolic.' },
   { title: 'Włos do włosa', desc: 'Nie sprzedaję pakietów. Sprzedaję efekt szyty na Twoją głowę.' },
+]
+
+const gallery = [
+  { src: '/images/02.jpg', alt: 'Efekt przedłużania włosów — długie ciemne proste włosy, salon Wejherowo' },
+  { src: '/images/03.jpg', alt: 'Metamorfoza włosów blond przed i po — przedłużanie, Wejherowo' },
+  { src: '/images/04.jpg', alt: 'Przedłużanie z fryzury bob do długich włosów — efekt before/after' },
+  { src: '/images/05.jpg', alt: 'Długie włosy blond po zabiegu przedłużania — Magda, Wejherowo' },
 ]
 
 const faq = [
   { q: '01 / Czy przedłużanie niszczy moje włosy?', a: 'Nie — przy dobrze dobranej metodzie. Konsultacja zaczyna się od diagnozy. Jeśli włosy są w kiepskiej kondycji, zalecam wzmocnienie lub zagęszczanie zamiast pełnego przedłużenia.' },
-  { q: '02 / Ile trwa pierwszy zabieg?', a: 'Od trzech do sześciu godzin. Pełen plan, ilość pasm i czas omawiamy w trakcie konsultacji — żebyś wiedziała czego się spodziewać.' },
+  { q: '02 / Ile trwa pierwszy zabieg?', a: 'Od trzech do sześciu godzin. Pełen plan, ilość pasm i czas omawiamy w trakcie bezpłatnej konsultacji — żebyś wiedziała czego się spodziewać.' },
   { q: '03 / Jak długo wytrzymują pasma?', a: 'Średnio 3–6 miesięcy przy domowej pielęgnacji zgodnej z moimi wskazówkami. Korekta przedłuża żywotność włosów o kolejne miesiące.' },
   { q: '04 / Czy mogę myć i stylizować swobodnie?', a: 'Tak. Po zabiegu zostawiam zestaw zasad: rodzaj szczotki, częstotliwość mycia, kosmetyki. Dalej — codzienność.' },
-  { q: '05 / Czy obsługujesz spoza Wejherowa?', a: 'Tak. Klientki przyjeżdżają z Redy, Rumi, Gdyni i całego Trójmiasta. Salon ma dobry dojazd i parking.' },
+  { q: '05 / Czy obsługujesz spoza Wejherowa?', a: 'Tak. Przyjeżdżają do mnie klientki z Redy, Rumi, Gdyni, Sopotu, Pucka i całego Trójmiasta. Salon ma dobry dojazd i parking.' },
 ]
 
 const pricing = [
@@ -39,14 +47,14 @@ export default function Page() {
       {/* MARQUEE / TICKER */}
       <div className="bg-wine text-gold overflow-hidden py-3 border-b border-gold/20">
         <div className="marquee text-center px-4">
-          30 dni gwarancji · Złota Seria · BabyHair · Wejherowo · Reda · Rumia · Gdynia · Od 2020 r.
+          30 dni gwarancji · Złota Seria · BabyHair · Wejherowo · Reda · Rumia · Gdynia · Sopot · Puck · Od 2020 r.
         </div>
       </div>
 
       {/* NAV */}
       <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-ink/10">
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
-          <a href="#top" className="font-display font-black text-2xl tracking-tight">
+          <a href="#top" className="font-display font-black text-2xl tracking-tight" aria-label="Strona główna">
             MAGDA<span className="text-wine">.</span>
           </a>
           <nav className="hidden lg:flex items-center gap-10 text-xs uppercase tracking-[0.2em] font-medium">
@@ -78,8 +86,10 @@ export default function Page() {
           </h1>
           <div className="mt-12 grid md:grid-cols-12 gap-8 items-end">
             <p className="md:col-span-6 md:col-start-1 text-lg md:text-xl leading-relaxed text-ink/70 max-w-xl">
-              Przedłużanie i zagęszczanie włosów w Wejherowie. Naturalne pasma najwyższej
-              jakości, indywidualny projekt na każdą głowę i <span className="text-wine font-semibold">30 dni gwarancji</span> w pakiecie.
+              Przedłużanie i zagęszczanie włosów w <strong className="font-semibold text-ink">Wejherowie</strong>.
+              Naturalne pasma najwyższej jakości, indywidualny projekt na każdą głowę i{' '}
+              <span className="text-wine font-semibold">30 dni gwarancji</span> w pakiecie. Obsługuję
+              Redę, Rumię, Gdynię, Sopot, Puck i okolice.
             </p>
             <div className="md:col-span-6 flex flex-wrap justify-start md:justify-end gap-3">
               <a
@@ -90,6 +100,8 @@ export default function Page() {
               </a>
               <a
                 href={BOOKSY_HREF}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
                 className="bg-gold text-ink px-7 py-4 text-sm uppercase tracking-[0.2em] font-bold hover:bg-goldLight transition"
               >
                 Booksy →
@@ -106,7 +118,7 @@ export default function Page() {
             { n: '2020', l: 'rok startu' },
             { n: '500+', l: 'metamorfoz' },
             { n: '30 dni', l: 'gwarancji' },
-            { n: '4 miasta', l: 'zasięgu' },
+            { n: '35 km', l: 'zasięgu' },
           ].map((s) => (
             <div key={s.l}>
               <p className="font-display font-black text-4xl md:text-5xl text-gold">{s.n}</p>
@@ -118,16 +130,28 @@ export default function Page() {
 
       {/* O MAGDZIE */}
       <section className="px-6 md:px-10 py-24 md:py-32">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-5">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 items-start">
+          <div className="md:col-span-4">
             <p className="marquee text-wine mb-6">O mnie</p>
             <h2 className="font-display font-black text-5xl md:text-7xl leading-[0.95]">
               Robię to,
               <br />
               <span className="italic font-normal text-wine">co kocham.</span>
             </h2>
+            <figure className="mt-10">
+              <div className="aspect-[3/4] bg-wine/10 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/01.jpg"
+                  alt="Magda — stylistka przedłużania włosów w Wejherowie, w swoim salonie"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption className="marquee text-ink/40 mt-3">Magda · stylistka i właścicielka</figcaption>
+            </figure>
           </div>
-          <div className="md:col-span-7 max-w-2xl md:pt-8">
+          <div className="md:col-span-7 md:col-start-6 max-w-2xl md:pt-2">
             <p className="text-2xl font-display leading-snug text-ink/90">
               Nie jestem usługą. Jestem osobą, do której przychodzisz na rozmowę, na rytuał,
               na metamorfozę.
@@ -138,8 +162,10 @@ export default function Page() {
               chcesz osiągnąć, potem dobieram metodę i materiał. W tej kolejności.
             </p>
             <p className="mt-6 text-lg text-ink/70 leading-relaxed">
-              Pracuję wyłącznie na włosach naturalnych Złotej Serii i BabyHair. Wybór
-              świadomy — po latach testów i błędów.
+              Pracuję wyłącznie na włosach naturalnych <strong className="font-semibold text-ink">Złotej
+              Serii</strong> i <strong className="font-semibold text-ink">BabyHair</strong>. Wybór świadomy —
+              po latach testów i błędów. Trafiają do mnie klientki z całego Trójmiasta —
+              z Redy, Rumi, Gdyni, Sopotu i Pucka.
             </p>
           </div>
         </div>
@@ -210,21 +236,19 @@ export default function Page() {
               Każda klientka. Każda metamorfoza. Każdy szczegół.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <div
-                key={n}
-                className={`bg-wine/40 flex items-center justify-center ${
-                  n % 3 === 0 ? 'aspect-[3/5]' : 'aspect-[3/4]'
-                }`}
-              >
-                <span className="font-display font-black text-gold/50 text-3xl">
-                  {String(n).padStart(2, '0')}
-                </span>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {gallery.map((g, i) => (
+              <figure key={g.src} className="aspect-[3/4] bg-wine/40 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-500"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </figure>
             ))}
           </div>
-          <p className="marquee text-cream/40 mt-6">Placeholder · galeria do uzupełnienia</p>
         </div>
       </section>
 
@@ -305,7 +329,7 @@ export default function Page() {
               </div>
               <div>
                 <p className="marquee text-wine mb-1">Adres</p>
-                <p className="font-display text-2xl">{ADDRESS}</p>
+                <address className="font-display text-2xl not-italic">{ADDRESS}</address>
               </div>
               <div>
                 <p className="marquee text-wine mb-1">Godziny</p>
@@ -323,6 +347,8 @@ export default function Page() {
               </a>
               <a
                 href={BOOKSY_HREF}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
                 className="bg-gold text-ink px-7 py-4 text-sm uppercase tracking-[0.2em] font-bold hover:bg-goldLight transition"
               >
                 Booksy →
@@ -332,10 +358,11 @@ export default function Page() {
           <div className="md:col-span-6">
             <div className="aspect-square bg-wine/10 overflow-hidden">
               <iframe
-                title="Mapa salonu"
-                src={`https://www.google.com/maps?q=${MAP_QUERY}&output=embed`}
+                title="Mapa dojazdu do salonu Magda — przedłużanie włosów Wejherowo"
+                src={MAP_EMBED_SRC}
                 className="w-full h-full"
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </div>
@@ -348,7 +375,7 @@ export default function Page() {
           <p className="font-display font-black text-2xl text-cream">MAGDA<span className="text-wine">.</span></p>
           <div className="flex flex-col md:flex-row gap-4 md:gap-8">
             <p>© {new Date().getFullYear()} Magda · Przedłużanie włosów</p>
-            <p>Wejherowo · Reda · Rumia · Gdynia</p>
+            <p>Wejherowo · Reda · Rumia · Gdynia · Sopot · Puck</p>
           </div>
         </div>
       </footer>
