@@ -1,0 +1,95 @@
+name: Build and deploy to S3 + CloudFront
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  NODE_VERSION: '20'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache npm (index)
+        uses: actions/cache@v4
+        with:
+          path: index/node_modules
+          key: npm-index-${{ hashFiles('index/package.json') }}
+
+      - name: Cache npm (v1)
+        uses: actions/cache@v4
+        with:
+          path: v1/node_modules
+          key: npm-v1-${{ hashFiles('v1/package.json') }}
+
+      - name: Cache npm (v2)
+        uses: actions/cache@v4
+        with:
+          path: v2/node_modules
+          key: npm-v2-${{ hashFiles('v2/package.json') }}
+
+      - name: Install (index)
+        run: cd index && npm install --no-audit --no-fund
+
+      - name: Install (v1)
+        run: cd v1 && npm install --no-audit --no-fund
+
+      - name: Install (v2)
+        run: cd v2 && npm install --no-audit --no-fund
+
+      - name: Build (index)
+        run: cd index && npm run build
+
+      - name: Build (v1)
+        run: cd v1 && npm run build
+
+      - name: Build (v2)
+        run: cd v2 && npm run build
+
+      - name: Assemble dist/
+        run: |
+          rm -rf dist
+          mkdir -p dist/v1 dist/v2
+          cp -r index/out/. dist/
+          cp -r v1/out/. dist/v1/
+          cp -r v2/out/. dist/v2/
+          ls -la dist
+          ls -la dist/v1
+          ls -la dist/v2
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync dist/ "s3://${{ vars.S3_BUCKET }}/" \
+            --delete \
+            --cache-control "public, max-age=300, must-revalidate"
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"
