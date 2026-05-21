@@ -1,0 +1,27 @@
+{
+  "Comment": "ACM cert validation for magda.style + www",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "_571d4e95b42ea68b0f2699908605b7d6.magda.style.",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [
+          { "Value": "_bce35275a81bc43eecf71932fefcd068.jkddzztszm.acm-validations.aws." }
+        ]
+      }
+    },
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "_4b3d150bacbc54ee015f8fef7a1ac57f.www.magda.style.",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [
+          { "Value": "_962d65ac93518d38a2f9be43431ca6ae.jkddzztszm.acm-validations.aws." }
+        ]
+      }
+    }
+  ]
+}
