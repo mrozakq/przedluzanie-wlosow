@@ -19,10 +19,13 @@ const usp = [
 ]
 
 const gallery = [
-  { src: '/images/02.jpg', alt: 'Efekt przedłużania włosów — długie ciemne proste włosy, salon Wejherowo' },
-  { src: '/images/03.jpg', alt: 'Metamorfoza włosów blond przed i po — przedłużanie, Wejherowo' },
-  { src: '/images/04.jpg', alt: 'Przedłużanie z fryzury bob do długich włosów — efekt before/after' },
-  { src: '/images/05.jpg', alt: 'Długie włosy blond po zabiegu przedłużania — Magda, Wejherowo' },
+  { src: '/images/2.webp', alt: 'Efekt przedłużania — długie ciemne proste włosy, salon Magda Wejherowo' },
+  { src: '/images/3.webp', alt: 'Metamorfoza włosów blond przed i po — przedłużanie, Wejherowo' },
+  { src: '/images/4.webp', alt: 'Przedłużanie z fryzury bob do długich włosów — efekt before/after' },
+  { src: '/images/5.webp', alt: 'Długie włosy blond po zabiegu przedłużania — Magda, Wejherowo' },
+  { src: '/images/6.webp', alt: 'Metamorfoza włosów — zagęszczanie i przedłużanie, klientka z Trójmiasta' },
+  { src: '/images/7.webp', alt: 'Naturalny efekt przedłużania — pasma Złotej Serii' },
+  { src: '/images/8.webp', alt: 'Długie włosy z pasmami BabyHair — salon Magda, Wejherowo' },
 ]
 
 const faq = [
@@ -142,7 +145,7 @@ export default function Page() {
               <div className="aspect-[3/4] bg-wine/10 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/01.jpg"
+                  src="/images/1.jpg"
                   alt="Magda — stylistka przedłużania włosów w Wejherowie, w swoim salonie"
                   className="w-full h-full object-cover"
                   loading="lazy"

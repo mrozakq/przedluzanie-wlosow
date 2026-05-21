@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     images: [
       {
-        url: '/images/01.jpg',
+        url: '/images/1.jpg',
         width: 1200,
         height: 900,
         alt: 'Magda — stylistka przedłużania włosów w Wejherowie',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_NAME,
     description: DESCRIPTION,
-    images: ['/images/01.jpg'],
+    images: ['/images/1.jpg'],
   },
   robots: {
     index: true,
@@ -89,7 +89,7 @@ const localBusinessJsonLd = {
   alternateName: 'Magda · Przedłużanie włosów Wejherowo',
   description: DESCRIPTION,
   url: SITE_URL,
-  image: `${SITE_URL}/images/01.jpg`,
+  image: `${SITE_URL}/images/1.jpg`,
   telephone: '+48533104437',
   priceRange: '$$',
   currenciesAccepted: 'PLN',
