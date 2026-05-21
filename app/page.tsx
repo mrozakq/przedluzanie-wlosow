@@ -413,14 +413,14 @@ export default function Page() {
             </div>
           </div>
           <p className="mt-8 text-xs text-cream/40">
-            O niezawodne działanie dba{' '}
+            O niezawodne działanie dba emTeq —{' '}
             <a
-              href="https://www.emteq.pl/"
+              href="https://www.emteq.pl"
               target="_blank"
               rel="noopener"
               className="text-cream/70 hover:text-gold underline-offset-4 hover:underline transition"
             >
-              emTeq — obsługa informatyczna Wejherowo
+              obsługa informatyczna Wejherowo
             </a>
             .
           </p>
