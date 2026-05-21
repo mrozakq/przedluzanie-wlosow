@@ -58,7 +58,7 @@ export default function Page() {
       <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-ink/10">
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
           <a href="#top" className="font-display font-black text-2xl tracking-tight" aria-label="Strona główna">
-            MAGDA<span className="text-wine">.</span>
+            MAGDA<span className="text-wine">.style</span>
           </a>
           <nav className="hidden lg:flex items-center gap-10 text-xs uppercase tracking-[0.2em] font-medium">
             <a href="#oferta" className="hover:text-wine transition">Oferta</a>
@@ -169,6 +169,36 @@ export default function Page() {
               Serii</strong> i <strong className="font-semibold text-ink">BabyHair</strong>. Wybór świadomy —
               po latach testów i błędów. Trafiają do mnie klientki z całego Trójmiasta —
               z Redy, Rumi, Gdyni, Sopotu i Pucka.
+            </p>
+            <p className="mt-6 text-lg text-ink/70 leading-relaxed">
+              Każdą wizytę zaczynam od konsultacji — bez pośpiechu, bez presji decyzji.
+              Sprawdzam strukturę i kondycję Twoich włosów, słucham co Cię gniecie, co
+              chciałabyś zmienić i jak wyobrażasz sobie codzienność po metamorfozie.
+              Czasem rekomenduję zagęszczanie zamiast pełnego przedłużenia. Czasem mówię
+              „poczekaj jeszcze miesiąc, włosy potrzebują regeneracji". Wolę stracić jeden
+              zabieg niż Twoje zaufanie.
+            </p>
+            <p className="mt-6 text-lg text-ink/70 leading-relaxed">
+              Sam zabieg to dla mnie spokojny rytuał, nie taśma produkcyjna. Pasma układam
+              tak, żebyś nie czuła ich pod palcami, a głowa pozostała lekka. Dopasowuję
+              kolor pod światło Twojej skóry, dobieram strukturę i grubość pasm tak, żeby
+              wtopiły się we własne włosy — efekt ma wyglądać jak Twoje włosy, tylko
+              dłuższe lub gęstsze. Nie jak peruka.
+            </p>
+            <p className="mt-6 text-lg text-ink/70 leading-relaxed">
+              Po wyjściu z salonu nie znikam. Każda klientka dostaje ode mnie komplet
+              wskazówek pielęgnacyjnych — jaką szczotkę kupić, jak myć, jak suszyć, czego
+              unikać. Jeśli coś niepokoi w pierwszych dniach — odpisuję, doradzam, w razie
+              potrzeby zapraszam na korektę w ramach <strong className="font-semibold text-ink">30-dniowej
+              gwarancji</strong>. To moja zasada, której nie negocjuję.
+            </p>
+            <p className="mt-6 text-lg text-ink/70 leading-relaxed">
+              Ponad połowa moich klientek to powracające metamorfozy — robimy korekty,
+              zmieniamy długości, dobieramy nowe odcienie razem z porami roku. To mnie
+              cieszy najbardziej. Bo każda kolejna wizyta to dowód, że pierwsza była dobra
+              — i że stworzyłyśmy razem coś, co dało się utrzymać. Po dziesiątkach włosów,
+              które przewinęły się przez mój fotel, wiem jedno: dobrze zrobione przedłużanie
+              nie krzyczy. Po prostu jest.
             </p>
           </div>
         </div>
@@ -374,12 +404,26 @@ export default function Page() {
 
       {/* FOOTER */}
       <footer className="bg-ink text-cream/60 px-6 md:px-10 py-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-4 text-sm">
-          <p className="font-display font-black text-2xl text-cream">MAGDA<span className="text-wine">.</span></p>
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-            <p>© {new Date().getFullYear()} Magda · Przedłużanie włosów</p>
-            <p>Wejherowo · Reda · Rumia · Gdynia · Sopot · Puck</p>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between gap-4 text-sm pb-8 border-b border-cream/10">
+            <p className="font-display font-black text-2xl text-cream">MAGDA<span className="text-wine">.style</span></p>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+              <p>© {new Date().getFullYear()} Magda · Przedłużanie włosów</p>
+              <p>Wejherowo · Reda · Rumia · Gdynia · Sopot · Puck</p>
+            </div>
           </div>
+          <p className="mt-8 text-xs text-cream/40">
+            O niezawodne działanie dba{' '}
+            <a
+              href="https://www.emteq.pl/"
+              target="_blank"
+              rel="noopener"
+              className="text-cream/70 hover:text-gold underline-offset-4 hover:underline transition"
+            >
+              emTeq — obsługa informatyczna Wejherowo
+            </a>
+            .
+          </p>
         </div>
       </footer>
     </main>
